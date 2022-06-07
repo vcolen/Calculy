@@ -71,7 +71,7 @@ struct ContentView: View {
                 if higherBoundIsLowerThanLowerBound() {
                     errorMessage = "Limite superior é menor que o limite inferior"
                     showError = true
-                }
+                } else {
                 
                 numerador = numerador.replacingOccurrences(of: " ", with: "")
                 denominador = denominador.replacingOccurrences(of: " ", with: "")
@@ -246,8 +246,8 @@ struct ContentView: View {
                     
                     tmp += ") "
                 }
-                
                 result = "\(tmp) + C"
+                }
                                 
             } label: {
                 Text("Calcular")
