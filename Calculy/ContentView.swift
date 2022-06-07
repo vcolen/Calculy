@@ -22,8 +22,10 @@ struct ContentView: View {
     @State private var lmtBaixo = 0
     @State private var lmtCima = 1
     @State private var array = [0, 0, 0]
-    @State private var num = "3x"
-    @State private var deno = "(x + 1)(x + 2)"
+    @State private var num = ""
+    @State private var deno = ""
+    @State private var numAux = "3x"
+    @State private var denoAux = "(x + 1)(x + 2)"
     @State private var tmp = ""
     @State private var numA = ""
     @State private var numB = ""
@@ -48,12 +50,12 @@ struct ContentView: View {
                     }
                     
                     VStack {
-                        TextField("3x", text: $num)
+                        TextField("3x", text: $numAux)
                             .multilineTextAlignment(.center)
                         Rectangle()
                             .fill(.black)
                             .frame(height: 3)
-                        TextField("(x + 1)(x + 2)", text: $deno)
+                        TextField("(x + 1)(x + 2)", text: $denoAux)
                             .multilineTextAlignment(.center)
                     }
                     
@@ -69,10 +71,8 @@ struct ContentView: View {
                         showError = true
                     } else {
                         
-                        num = num.replacingOccurrences(of: " ", with: "")
-                        num = num.replacingOccurrences(of: "X", with: "x")
-                        deno = deno.replacingOccurrences(of: " ", with: "")
-                        deno = deno.replacingOccurrences(of: "X", with: "x")
+                        num = numAux.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "X", with: "x")
+                        deno = denoAux.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "X", with: "x")
                         
                         if Calculator.hasParenthesis(s: deno) == false {
                             deno = Calculator.fatorar(s: &deno)
