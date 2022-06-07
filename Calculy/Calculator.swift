@@ -64,15 +64,15 @@ struct Calculator {
         return s
     }
     
-    static func calcular(s: inout String) -> Int {
+    static func calcular(s: String) -> Int {
         var n = 0
-        s = s[0..<s.count-1]
-        for i in stride(from: s.count - 1, to: 2, by: -1) {
-            if s[i] == "+" {
-                n = Int(s[1..<i])! + Int(s[i+1...s.count])!
+        let equation = s[1..<s.count-1]
+        for i in stride(from: equation.count - 1, to: 0, by: -1) {
+            if equation[i] == "+" {
+                n = Int(equation[0..<i])! + Int(equation[i..<equation.count])!
                 break
-            } else if (s[i] == "-") {
-                n = Int(s[1..<i])! - Int(s[i+1...s.count])!
+            } else if (equation[i] == "-") {
+                n = Int(equation[0..<i])! - Int(equation[i+1..<equation.count])!
                 break
             }
         }
