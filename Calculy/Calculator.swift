@@ -36,13 +36,14 @@ struct Calculator {
             }
         }
         tmp = s[q..<s.count]
+        
         //Xˆ2-5x+6
         if tmp.count > 1 {
             array[n] = Int(tmp)!
         }
         
         //Calculo do delta
-        n = (array[1] * array[1]) * (-4 * (array[0] * array[2]))
+        n = (array[1] * array[1]) - (4 * (array[0] * array[2]))
         
         if n >= 0 {
             x1 = Float(((-1 * array[1]) + Int(sqrtf(Float(n)))) / 2 * array[0])
@@ -59,7 +60,7 @@ struct Calculator {
                 s = tmp + "(x-\(Int(-1 * x2)))"
             }
         } else {
-            print("delta nao possui raiz")
+            print("Delta não possui raíz")
         }
         return s
     }

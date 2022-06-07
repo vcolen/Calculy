@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var m = 0
     @State private var q = 1
     @State private var lmtBaixo = 0
-    @State private var lmtCima = 0
+    @State private var lmtCima = 1
     @State private var array = [0, 0, 0]
     @State private var num = "3x"
     @State private var deno = "(x + 1)(x + 2)"
@@ -34,7 +34,6 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 40) {
                 HStack {
-                    
                     ZStack(alignment: .trailing) {
                         Image(uiImage: UIImage(named: "integral")!)
                             .resizable()
@@ -71,7 +70,9 @@ struct ContentView: View {
                     } else {
                         
                         num = num.replacingOccurrences(of: " ", with: "")
+                        num = num.replacingOccurrences(of: "X", with: "x")
                         deno = deno.replacingOccurrences(of: " ", with: "")
+                        deno = deno.replacingOccurrences(of: "X", with: "x")
                         
                         if Calculator.hasParenthesis(s: deno) == false {
                             deno = Calculator.fatorar(s: &deno)
@@ -91,6 +92,7 @@ struct ContentView: View {
                         }
                         
                         // Extrai as constantes do denominador
+                        n = 0
                         tmp = deno.replacingOccurrences(of: "x", with: "")
                         for i in 0..<tmp.count {
                             if tmp[i] == "(" {
@@ -142,11 +144,14 @@ struct ContentView: View {
                             } else {
                                 numA = "\(m)/\(n)"
                             }
+                            if m > 0 {
+                                numA = " + \(numA)"
+                            }
                             tmp += "\(numA)*ln\(partes[0]) "
                         }
                         
                         // Calcula o número referente a B
-                        m = a - (b * q)
+                        m = a - (c * q)
                         
                         if d == 0 {
                             n = b - c
@@ -166,10 +171,13 @@ struct ContentView: View {
                             } else {
                                 numB = "\(m)/\(n)"
                             }
+                            if m > 0 {
+                                numB = " + \(numB)"
+                            }
                             tmp += "\(numB)*ln\(partes[1]) "
                         }
                         
-                        // Calcula o número referente a B
+                        // Calcula o número referente a C
                         
                         if !(partes[2].isEmpty) {
                             m = a - (d * q)
@@ -186,10 +194,13 @@ struct ContentView: View {
                                 } else if m % n == 0 {
                                     numC  = String(m / n)
                                 } else {
-                                    numC = "\(m)/\(numC)"
+                                    numC = "\(m)/\(n)"
                                     if m >= 0 {
                                         numC = "+ \(numC)"
                                     }
+                                }
+                                if m > 0 {
+                                    numC = " + \(numC)"
                                 }
                                 
                                 tmp += "\(numC) *ln\(partes[2]) "
